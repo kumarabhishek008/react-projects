@@ -23,7 +23,7 @@ function App() {
     event.preventDefault();
       
     todos.filter(todo => event.target.remove());
-    // setTodos([...a]);
+
       
 
   }
