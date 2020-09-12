@@ -15,15 +15,18 @@ import initialState from './userReducer';
 // ));
 const store = createStore(userReducer,applyMiddleware(logger,thunk))
 
-    
-   
+export function get_users(searchValue){
     store.dispatch((dispatch)=>{
     dispatch({type:"RECIEVE_USER",payload:"anonymous"})
-    axios.get(`https://api.github.com/search/users?q=a+in:name&sort=repositories&order=desc`)
+    axios.get(`https://api.github.com/search/users?q=${searchValue}+in:name&sort=repositories&order=desc`)
     .then((response)=>{
+        console.log(response,'res')
         dispatch({type:"RECIEVED_USER",payload:response.data})
     }).catch((err)=>{console.log(err)})
     })
+
+}   
+   
 
     
 

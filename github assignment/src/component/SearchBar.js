@@ -1,5 +1,6 @@
 import React,{useState,createContext} from 'react'
 import {Input, Button} from 'semantic-ui-react';
+import {get_users} from '../reduxContext/Store'
 import axios from 'axios';
 //import FetchUser from '../reduxContext/Store'
 
@@ -15,6 +16,7 @@ const SearchBar = () => {
     const handleClick = async () =>{
         console.log(searchInput)
         setRepos(searchInput);
+        get_users(searchInput)
         
         // try {
         //     const result = await axios.get(`https://api.github.com/search/users?q=a+in:name&sort=repositories&order=10`)
