@@ -1,9 +1,23 @@
+import { CommentActions } from "semantic-ui-react";
+
 const initState ={
     usernames : [],
     repos : [],
     id: [],
     followers: [],
     users_avatar : [],
+    userName:"",
+    userLogin:"",
+    userRepos_url:"",
+    userAvatar:"",
+    userFollowers:"",
+    userFavorite:"",
+    userGithub : "",
+    userRepos : [],
+    userBlog : "",
+    userBio:"",
+    userFollowing:"",
+    grabbedUserData: false,
     message : "",
     grabbedData : false
 }
@@ -31,7 +45,7 @@ const reducer = (state=initState,action) =>{
                 usernames : usersLogin,
                 repos : usersRepos,
                 id : usersId,
-                followers: usersFollowers,
+                followers : usersFollowers,
                 users_avatar : usersAvatar,
                 grabbedData : true
 
@@ -43,7 +57,30 @@ const reducer = (state=initState,action) =>{
 
                 }
 
-            
+            case "FETCH_USER":
+                
+                return{
+                    ...state,
+                    userName       :    action.userData.name,
+                    userLogin      :    action.userData.login,
+                    userRepos_url  :    action.userData.repos_url,
+                    userAvatar     :    action.userData.avatar_url,
+                    userFollowers  :    action.userData.followers,
+                    userFollowing  :    action.userData.following,
+                    userFavorite   :    "",
+                    userGithub     :    "",
+                    userBlog       :    action.userData.blog,
+                    userBio        :    action.userData.bio,
+                    grabbedUserData:    true
+
+                }
+            case "FETCH_USER_REPOS":
+                console.log("show repos",action.Repos)
+                return {
+                    ...state,
+                    userRepos : action.Repos,
+
+                };
         default:
             return state;
     }

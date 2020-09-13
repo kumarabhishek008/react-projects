@@ -27,3 +27,39 @@ export const getUserData = (e,username) => {
     }
 
 }
+export const fetchUserData =(e,login) =>{
+    e.persist();
+    return dispatch => {
+        axios.get(`https://api.github.com/users/${login}`)
+        .then((response) => {
+            const userData = response.data;
+            dispatch({
+                type : "FETCH_USER",
+                e,
+                userData
+
+            })
+            }).catch((err)=>{
+                console.log(err)
+        })
+    }
+
+}
+export const getUserRepos = (e,login) =>{
+    e.persist();
+    return dispatch => {
+        axios.get(`https://api.github.com/users/${login}/repos`)
+        .then((response)=>{
+
+            const Repos = response.data;
+            dispatch({
+                type : "FETCH_USER_REPOS",
+                e,
+                Repos,
+
+            })
+        }).catch((err)=>{
+            console.log(err)
+        })
+    }
+}
